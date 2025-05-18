@@ -6,7 +6,7 @@ module Api
                                      :sku, :quantity,
                                      prescription: [
                                        :type, :lens_color,
-                                      { left: [:SPH], right: [:SPH]}
+                                      { left: [ :SPH ], right: [ :SPH ] }
                                       ]
                                    ])
       validator = OrderPayloadValidator.new(order_params)

@@ -1,6 +1,5 @@
 module Order
   class Route
-
   def initialize(order, stock)
     @order = order
     @stock = stock
