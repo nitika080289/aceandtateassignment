@@ -13,9 +13,6 @@ class OrderPayloadValidator
   end
 
   def validate_lines
-    if @lines.empty?
-      errors.add :lines, "Lines must be present"
-    end
     order_line = @lines.first
 
     if order_line["sku"].blank?

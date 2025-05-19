@@ -9,6 +9,9 @@ module Api
                                       { left: [ :SPH ], right: [ :SPH ] }
                                       ]
                                    ])
+      if !order_params["lines"].present? || !order_params["id"].present? || !order_params["shipping_country"].present?
+        return render json: { message: "Missing required parameters" }, status: :bad_request
+      end
       validator = OrderPayloadValidator.new(order_params)
 
       unless validator.valid?
@@ -23,13 +26,11 @@ module Api
 
       render json: { routing_result: routing_result }, status: :ok
 
-    rescue ActionController::ParameterMissing => e
-      render json: { message: e.message }, status: :bad_request
-
     rescue JSON::ParserError => e
       render json: { message: e.message }, status: :bad_request
     rescue => e
       Rails.logger.error e.message
+      puts e.message
       render json: { message: e.message }, status: :internal_server_error
     end
   end
