@@ -36,10 +36,10 @@ module Order
   end
 
   def high_prescription?
-    sph_left = @order.dig("prescription", "left", "SPH").to_i
-    sph_right = @order.dig("prescription", "right", "SPH").to_i
+    sph_left = @order.dig("lines", 0, "prescription", "left", "SPH")
+    sph_right = @order.dig("lines", 0, "prescription", "right", "SPH")
 
-    (sph_left < -6 || sph_left > 4) || (sph_right < -6 || sph_right > 4)
+    (sph_left.is_a?(Numeric) && (sph_left < -6 || sph_left > 4)) || (sph_right.is_a?(Numeric) &&(sph_right < -6 || sph_right > 4))
   end
   end
 end

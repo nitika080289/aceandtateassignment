@@ -65,7 +65,15 @@ RSpec.describe Order::Route do
   end
 
   it 'routes to LETHA if the lens is high prescription' do
-    order = create_order("prescription" =>  { "left" => { "SPH" => -7 },  "right" => { "SPH" => -1.25 } })
+    order = create_order(
+      "lines" => [{
+                    "sku" => "acetate-frame-1",
+                    "prescription" => {
+                      "left" => { "SPH" => -7 },
+                      "right" => { "SPH" => -1.25 }
+                    }
+                  }]
+    )
     routing_result = described_class.new(order, stock).call
     expect(routing_result).to eq "LETHA"
   end
