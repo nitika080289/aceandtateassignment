@@ -30,7 +30,6 @@ module Api
       render json: { message: e.message }, status: :bad_request
     rescue => e
       Rails.logger.error e.message
-      puts e.message
       render json: { message: e.message }, status: :internal_server_error
     end
   end
