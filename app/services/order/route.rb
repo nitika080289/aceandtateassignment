@@ -19,7 +19,7 @@ module Order
   end
 
   def rimless?
-    @order["lines"][0]["sku"] == "rimless-1"
+    @order.dig("lines", 0, "sku") == "rimless-1"
   end
 
   def us_bound?

@@ -22,16 +22,16 @@ class OrderPayloadValidator
   end
 
   def validate_prescription(prescription)
-    return unless prescription
+    return errors.add :prescription, "must be present" unless prescription
 
     unless %w[single_vision multifocal].include?(prescription["type"])
-    errors.add :prescription, "Invalid prescription type"
+      return errors.add :prescription, "type invalid"
     end
 
     %w[left right].each do |eye|
       sph = prescription.dig(eye, "SPH")
       unless sph.is_a?(Numeric)
-        errors.add :sph, "Invalid SPH value"
+        return errors.add :sph, "Invalid SPH value"
       end
     end
   end
