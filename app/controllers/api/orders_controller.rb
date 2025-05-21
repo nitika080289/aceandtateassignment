@@ -19,10 +19,7 @@ module Api
         return
       end
 
-      stock_overview_path = Rails.root.join("spec", "support", "stock", "stock_overview.json")
-      stock_overview = JSON.parse(File.read(stock_overview_path))
-
-      routing_result = Order::Route.new(order_params, stock_overview).call
+      routing_result = Order::Route.new(order_params, STOCK_OVERVIEW).call
 
       render json: { routing_result: routing_result }, status: :ok
 
