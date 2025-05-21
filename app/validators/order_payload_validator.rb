@@ -22,7 +22,6 @@ class OrderPayloadValidator
   end
 
   def validate_prescription(prescription)
-
     return errors.add :prescription, "must be present" unless prescription
 
     unless %w[single_vision multifocal].include?(prescription["type"])
